@@ -4,43 +4,45 @@ import {
 	OnModuleDestroy,
 	OnModuleInit,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import mongoose, { Connection } from 'mongoose';
 
 @Injectable()
 export class MongoDBService implements OnModuleInit, OnModuleDestroy {
 	private readonly logger = new Logger(MongoDBService.name);
-	private connection: Connection;
+	private connection: Connection | null = null;
+
+	constructor(private readonly configService: ConfigService) {}
 
 	async onModuleInit() {
-		const uri =
-			process.env.MONGO_URI ||
-			'mongodb://localhost:27017/socialfix-test-database';
-		this.logger.log(`Connecting to MongoDB at ${uri}...`);
+		const uri = this.configService.get<string>('MONGODB_URI');
 
-		await mongoose.connect(uri);
-		this.connection = mongoose.connection;
+		if (!uri) {
+			this.logger.error('MONGODB_URI not defined in environment variables');
+			throw new Error('Missing MongoDB URI');
+		}
 
-		this.connection.once('open', () =>
-			this.logger.log('✅ Connected to MongoDB!'),
-		);
-		this.connection.on('error', (err) =>
-			this.logger.error(`❌ MongoDB error: ${err}`),
-		);
+		try {
+			const connection = await mongoose.createConnection(uri).asPromise();
+			this.connection = connection;
+			this.logger.log('MongoDB connected successfully');
+		} catch (error) {
+			this.logger.error('Failed to connect to MongoDB', error);
+			throw error;
+		}
 	}
 
 	getConnection(): Connection {
+		if (!this.connection) {
+			throw new Error('MongoDB connection not initialized');
+		}
 		return this.connection;
 	}
 
-	getModel<T>(name: string, schema: mongoose.Schema): mongoose.Model<T> {
-		if (mongoose.models[name]) {
-			return mongoose.models[name] as mongoose.Model<T>;
-		}
-		return mongoose.model<T>(name, schema);
-	}
-
 	async onModuleDestroy() {
-		await mongoose.disconnect();
-		this.logger.log('🔌 MongoDB disconnected.');
+		if (this.connection) {
+			await this.connection.close();
+			this.logger.log('MongoDB connection closed');
+		}
 	}
 }

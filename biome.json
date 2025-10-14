@@ -1,0 +1,39 @@
+{
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"useImportType": "off"
+			},
+			"suspicious": {
+				"noMisleadingCharacterClass": "warn"
+			},
+			"correctness": {
+				"noUnusedImports": "error"
+			},
+			"recommended": true
+		},
+		"enabled": true
+	},
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		},
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineEnding": "crlf"
+	}
+}

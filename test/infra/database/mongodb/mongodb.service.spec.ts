@@ -52,14 +52,14 @@ describe('MongoDBService', () => {
 		);
 	});
 
-	it('should throw an error if MONGODB_URI is not defined', async () => {
+	it('should throw an error if MONGO_URI is not defined', async () => {
 		vi.spyOn(configService, 'get').mockReturnValue(undefined);
 
 		await expect(mongoDBService.onModuleInit()).rejects.toThrowError(
 			'Missing MongoDB URI',
 		);
 		expect(mockLogger.error).toHaveBeenCalledWith(
-			'MONGODB_URI not defined in environment variables',
+			'MONGO_URI not defined in environment variables',
 		);
 	});
 

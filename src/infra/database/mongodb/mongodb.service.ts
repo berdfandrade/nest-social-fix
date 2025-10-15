@@ -15,10 +15,10 @@ export class MongoDBService implements OnModuleInit, OnModuleDestroy {
 	constructor(private readonly configService: ConfigService) {}
 
 	async onModuleInit() {
-		const uri = this.configService.get<string>('MONGODB_URI');
+		const uri = this.configService.get<string>('MONGO_URI');
 
 		if (!uri) {
-			this.logger.error('MONGODB_URI not defined in environment variables');
+			this.logger.error('MONGO_URI not defined in environment variables');
 			throw new Error('Missing MongoDB URI');
 		}
 

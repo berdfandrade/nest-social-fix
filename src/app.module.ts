@@ -1,6 +1,6 @@
+import { HttpModule } from '@infra/http/http.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { HttpModule } from 'src/infra/http/http.module';
 
 @Module({
 	imports: [

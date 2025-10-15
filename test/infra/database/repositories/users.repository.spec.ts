@@ -1,5 +1,5 @@
 import { Model, Query } from 'mongoose';
-import { UserRolesEnum } from 'src/common/constants/user-roles.constant';
+import { UserRolesEnum } from 'src/common/constants/enums/user-roles.constant';
 import { UsersRepository } from 'src/infra/database/repositories/users.repository';
 import {
 	User,

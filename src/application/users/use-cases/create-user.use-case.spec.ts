@@ -12,24 +12,23 @@ import {
 import { createMongooseModel } from 'test/utils/create-mongoose-model.utils';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
+let usersRepository: UsersRepository;
+
+beforeAll(async () => {
+	await setupTestDB();
+	const userModel = createMongooseModel<UserDocument>(User.name, UserSchema);
+	usersRepository = new UsersRepository(userModel);
+});
+
+afterAll(async () => {
+	await teardownTestDB();
+});
+
+beforeEach(async () => {
+	await clearTestDB();
+});
+
 describe('UsersRepository', () => {
-	let usersRepository: UsersRepository;
-
-	beforeAll(async () => {
-		await setupTestDB();
-
-		const userModel = createMongooseModel<UserDocument>(User.name, UserSchema);
-		usersRepository = new UsersRepository(userModel);
-	});
-
-	afterAll(async () => {
-		await teardownTestDB();
-	});
-
-	beforeEach(async () => {
-		await clearTestDB();
-	});
-
 	it('should create a user', async () => {
 		const user = await usersRepository.create({
 			name: 'John Doe',

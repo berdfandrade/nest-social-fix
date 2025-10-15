@@ -26,8 +26,8 @@ export class CreateUserUseCase {
 			password: hashedPassword,
 		});
 
-		const userObj = user.toObject();
-		delete userObj.password;
-		return userObj as UserDocument;
+		if (!user) throw new BadRequestException('Erro ao criar usuário');
+
+		return user;
 	}
 }

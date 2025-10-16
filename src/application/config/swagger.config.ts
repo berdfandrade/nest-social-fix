@@ -12,3 +12,8 @@ export function swaggerConfig(app: INestApplication) {
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('docs', app, document);
 }
+
+export const Tags = {
+	USER_CONTROLLER: '👤 Users',
+	AUTH_CONTROLLER: '🔐 Auth',
+};

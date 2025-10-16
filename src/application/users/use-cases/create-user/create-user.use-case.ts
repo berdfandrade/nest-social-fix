@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersRepository } from 'src/infra/database/repositories/users.repository';
 import { UserDocument } from 'src/infra/database/schemas/users/user.schema';
 import { HashProvider } from 'src/infra/providers/hash/types/hash.provider.props';
-import { CreateUserDTO } from '../dtos/create-user.dto';
+import { CreateUserDTO } from '../../dtos/create-user.dto';
 
 @Injectable()
 export class CreateUserUseCase {

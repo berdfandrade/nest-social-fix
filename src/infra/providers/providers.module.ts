@@ -9,5 +9,6 @@ import { HashProvider } from './hash/types/hash.provider.props';
 			useClass: HashProviderImplementation,
 		},
 	],
+	exports: [HashProvider],
 })
 export class ProvidersModule {}

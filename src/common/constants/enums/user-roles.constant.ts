@@ -1,3 +1,5 @@
+export type Roles = 'VOLUNTEER' | 'ORGANIZER' | 'ADMIN';
+
 export enum UserRolesEnum {
 	VOLUNTEER = 'VOLUNTEER',
 	ORGANIZER = 'ORGANIZER',

@@ -10,7 +10,9 @@ export function swaggerConfig(app: INestApplication) {
 		.build();
 
 	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup('docs', app, document);
+	SwaggerModule.setup('docs', app, document, {
+		customSiteTitle: 'Social Fix [Docs]',
+	});
 }
 
 export const Tags = {

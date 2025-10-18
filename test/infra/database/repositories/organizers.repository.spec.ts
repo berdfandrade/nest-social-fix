@@ -1,7 +1,6 @@
 import { OrganizersRepository } from '@infra/database/repositories/organizers.repository';
 import {
 	Organizer,
-	OrganizerDocument,
 	OrganizerSchema,
 } from '@infra/database/schemas/organizers/organizer.schema';
 import { MongoMemoryServer } from 'mongodb-memory-server';

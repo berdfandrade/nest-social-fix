@@ -81,9 +81,9 @@ describe('OrganizersRepository (integration)', () => {
 		});
 
 		const deleted = await repository.delete({ _id: created._id });
-		expect(deleted).not.toBeNull(); // <- o método retorna o doc deletado
+		expect(deleted).not.toBeNull();
 
 		const found = await repository.findById(created._id.toString());
-		expect(found).toBeNull(); // <- confirma que foi realmente deletado
+		expect(found).toBeNull();
 	});
 });

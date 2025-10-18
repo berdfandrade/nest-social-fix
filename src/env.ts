@@ -3,11 +3,22 @@ import { logsAdapter } from '@common/adapters/api-logs/logs.adapter';
 import { z } from 'zod';
 
 const envSchema = z.object({
+	NODE_ENV: z
+		.enum<string[]>(['development', 'production', 'test'], {
+			error: (_) => 'Ambiente de desenvolvimento inválido',
+		})
+		.default('development'),
+	HOST: z.string().optional(),
+	PORT: z.string().default('5000'),
+	API_URL: z.string().default('http://localhost:5000'),
 	MONGO_URI: z.string().min(1, { message: 'A MONGO_URI é obrigatória' }),
 	JWT_SECRET: z.string().min(1, { message: 'O JWT_SECRET é obrigatório' }),
 	JWT_REFRESH_SECRET: z
 		.string()
 		.min(1, { message: 'O JWT_REFRESH_SECRET é obrigatório' }),
+	MAIL_SENDER_EMAIL: z.string(),
+	MAIL_SENDER_NAME: z.string(),
+	RESEND_MAIL_KEY: z.string(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);

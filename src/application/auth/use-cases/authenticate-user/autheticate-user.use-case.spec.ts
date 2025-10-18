@@ -8,7 +8,6 @@ import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import { AuthenticateUserUseCase } from './authenticate-user.use-case';
 
-// mock do mapper (para não depender da implementação real)
 vi.mock('@application/auth/mappers/user.mapper', () => ({
 	mapAuthUserData: vi.fn((user, tokens) => ({
 		id: user.id,

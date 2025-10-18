@@ -5,7 +5,7 @@ import { AuthController } from '@infra/http/controllers/auth/auth.controller';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from 'src/infra/database/database.module';
 import { ProvidersModule } from 'src/infra/providers/providers.module';
-import { UsersController } from './controllers/users/users.controller';
+import { UsersController } from './controllers/users/public/users.controller';
 
 @Module({
 	imports: [ProvidersModule, DatabaseModule, AuthModule],
